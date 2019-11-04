@@ -1,0 +1,30 @@
+section.new-tweet {
+  width: 100%;
+}
+
+section.new-tweet h2 {
+  text-align: center;
+}
+
+section.new-tweet textarea {
+  width: 100%;
+  height: 3rem;
+  background: transparent;
+  outline: none;
+  border: none;
+  resize: none;
+  border-bottom: 5px solid #545149;
+}
+
+section.new-tweet input {
+  font-family: 'Bungee', sans-serif;
+  color: #ffffff;
+  background-color: #4056A1;
+  border: none;
+}
+
+section.new-tweet .counter {
+  font-family: 'Bungee', sans-serif;
+  position: absolute;
+  right: 0;
+}
