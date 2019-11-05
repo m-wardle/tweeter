@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Bungee|Source+Sans+Pro:300,300i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bungee|Source+Sans+Pro:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css?ver=5.8.2" rel="stylesheet">
 
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -22,6 +23,9 @@
     <!-- New Tweet Form CSS -->
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
 
+    <!-- Tweet CSS -->
+    <link rel="stylesheet" href="/styles/tweets.css" type="text/css" />
+
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
@@ -30,17 +34,23 @@
 
     <!-- CharCount JS -->
     <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+
+    <!-- Tweet JS -->
+    <script type="text/javascript" src="/scripts/tweets.js"></script>
   </head>
 
   <body>
     <!-- Top nav bar (fixed) -->
     <nav>
       <span id="logo">tweeter</span>
-      <span><b>Write</b> a new tweet</span>
-
+      <span>
+        <b>Write</b> a new tweet
+        <i class="fas fa-angle-double-down"></i>
+      </span>
+      
       <!-- TODO: Add chevrons/arrows below 2nd span -->
     </nav>
-    <header>
+    <header id="site-header">
         <div id="avatar">
             <img src="/images/profile-hex.png"> 
         </div>
@@ -51,22 +61,63 @@
     </header>
 
     <!-- Page-specific (main) content here -->
-    <main class="container">
-        <section class="new-tweet">
-            <h2>Compose Tweet</h2>
-            <form action="/tweets" method="POST">
-              <textarea name="text" placeholder="What are you humming about?"></textarea>
-              <input type="submit" value="Tweet">
-              <span class="counter">140</span>
-            </form>
-          </section>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet mattis lacus, at aliquam lacus. Praesent nec arcu at turpis eleifend tincidunt eu vitae purus. Sed gravida mi felis, quis vulputate ligula ornare vitae. Suspendisse tortor nisl, rhoncus eget est eget, sodales sodales libero. Vestibulum et interdum arcu, ac semper tellus. Sed bibendum sagittis libero eget rhoncus. Sed molestie rhoncus nisi ac pretium. Fusce scelerisque congue tellus, eget vehicula lacus dignissim sit amet. Duis purus purus, pulvinar vitae mi id, semper rhoncus sapien.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet mattis lacus, at aliquam lacus. Praesent nec arcu at turpis eleifend tincidunt eu vitae purus. Sed gravida mi felis, quis vulputate ligula ornare vitae. Suspendisse tortor nisl, rhoncus eget est eget, sodales sodales libero. Vestibulum et interdum arcu, ac semper tellus. Sed bibendum sagittis libero eget rhoncus. Sed molestie rhoncus nisi ac pretium. Fusce scelerisque congue tellus, eget vehicula lacus dignissim sit amet. Duis purus purus, pulvinar vitae mi id, semper rhoncus sapien.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet mattis lacus, at aliquam lacus. Praesent nec arcu at turpis eleifend tincidunt eu vitae purus. Sed gravida mi felis, quis vulputate ligula ornare vitae. Suspendisse tortor nisl, rhoncus eget est eget, sodales sodales libero. Vestibulum et interdum arcu, ac semper tellus. Sed bibendum sagittis libero eget rhoncus. Sed molestie rhoncus nisi ac pretium. Fusce scelerisque congue tellus, eget vehicula lacus dignissim sit amet. Duis purus purus, pulvinar vitae mi id, semper rhoncus sapien.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet mattis lacus, at aliquam lacus. Praesent nec arcu at turpis eleifend tincidunt eu vitae purus. Sed gravida mi felis, quis vulputate ligula ornare vitae. Suspendisse tortor nisl, rhoncus eget est eget, sodales sodales libero. Vestibulum et interdum arcu, ac semper tellus. Sed bibendum sagittis libero eget rhoncus. Sed molestie rhoncus nisi ac pretium. Fusce scelerisque congue tellus, eget vehicula lacus dignissim sit amet. Duis purus purus, pulvinar vitae mi id, semper rhoncus sapien.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet mattis lacus, at aliquam lacus. Praesent nec arcu at turpis eleifend tincidunt eu vitae purus. Sed gravida mi felis, quis vulputate ligula ornare vitae. Suspendisse tortor nisl, rhoncus eget est eget, sodales sodales libero. Vestibulum et interdum arcu, ac semper tellus. Sed bibendum sagittis libero eget rhoncus. Sed molestie rhoncus nisi ac pretium. Fusce scelerisque congue tellus, eget vehicula lacus dignissim sit amet. Duis purus purus, pulvinar vitae mi id, semper rhoncus sapien.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet mattis lacus, at aliquam lacus. Praesent nec arcu at turpis eleifend tincidunt eu vitae purus. Sed gravida mi felis, quis vulputate ligula ornare vitae. Suspendisse tortor nisl, rhoncus eget est eget, sodales sodales libero. Vestibulum et interdum arcu, ac semper tellus. Sed bibendum sagittis libero eget rhoncus. Sed molestie rhoncus nisi ac pretium. Fusce scelerisque congue tellus, eget vehicula lacus dignissim sit amet. Duis purus purus, pulvinar vitae mi id, semper rhoncus sapien.</p>
 
+    <!-- New Tweet -->
+    <main class="container">
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2>
+        <form action="/tweets" method="POST">
+          <textarea name="text" placeholder="What are you humming about?"></textarea>
+          <input type="submit" value="Tweet">
+          <span class="counter">140</span>
+        </form>
+      </section>
+
+      <!-- Tweets -->
+      <article class="tweet">
+        <header>
+          <div class="avatar-name">
+            <img class="tweet-avatar" src="https://i.imgur.com/73hZDYK.png">
+            <p class="tweet-name">Newton</p>
+          </div>
+          <p class="tweet-handle">@SirIsaac</p>
+        </header>
+        <div class="tweet-text">
+          <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at elementum purus. Aenean sed suscipit enim, ac consequat justo. Sed nullam</p>
+        </div>
+        <footer>
+          <p class="tweet-timestamp">10 days ago</p>
+          <div class="tweet-icons">
+            <i class="fas fa-flag"></i>
+            <i class="fas fa-retweet"></i>
+            <i class="fas fa-heart"></i>
+          </div>
+        </footer>
+      </article>  
+
+      <article class="tweet">
+          <header>
+            <div class="avatar-name">
+              <img class="tweet-avatar" src="https://i.imgur.com/73hZDYK.png">
+              <p class="tweet-name">Newton</p>
+            </div>
+            <p class="tweet-handle">@SirIsaac</p>
+          </header>
+          <div class="tweet-text">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at elementum purus. Aenean sed suscipit enim, ac consequat justo. Sed nullam</p>
+          </div>
+          <footer>
+            <p class="tweet-timestamp">10 days ago</p>
+            <div class="tweet-icons">
+              <i class="fas fa-flag"></i>
+              <i class="fas fa-retweet"></i>
+              <i class="fas fa-heart"></i>
+            </div>
+          </footer>
+        </article> 
+        
     </main>
   </body>
 </html>
