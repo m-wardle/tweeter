@@ -4,31 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-]
-
 const escape = function(str) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
@@ -47,7 +22,7 @@ const dateDifference = function(date) {
   //     differenceDay = differenceDay % 365;
   //   }
 
-  return differenceDay;
+  return (differenceDay + (differenceDay > 1 ? 'days ago' : 'day ago') || 'Today');
   }
 
 const createTweetElement = function(tweetObj) {
@@ -63,7 +38,7 @@ const createTweetElement = function(tweetObj) {
     <p>${escape(tweetObj.content.text)}</p>
   </div>
   <footer>
-    <p class="tweet-timestamp">${dateDifference(tweetObj.created_at)} days ago</p>
+    <p class="tweet-timestamp">${dateDifference(tweetObj.created_at)}</p>
     <div class="tweet-icons">
       <i class="fas fa-flag"></i>
       <i class="fas fa-retweet"></i>
@@ -81,6 +56,29 @@ const renderTweets = function(tweets) {
   }
 }
 
+const loadTweets = async () =>  {
+  try {
+    const response = await $.ajax({
+      url: `/tweets`,
+      type: 'GET'
+    })
+
+    renderTweets(response)
+
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
 $(document).ready(function() {
-  renderTweets(data);
+  loadTweets();
+  $('#compose-tweet').submit(function(event) {
+    event.preventDefault();
+    $.ajax({ 
+      url: `/tweets`,
+      type: 'POST',
+      data: $(this).serialize()
+     })
+  });
 });
