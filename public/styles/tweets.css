@@ -41,6 +41,7 @@ div.tweet-text {
 div.tweet-text p {
   margin-top: 0px;
   margin-bottom: 50px;
+  word-break: break-all;
 }
 
 article.tweet > footer {
