@@ -4,11 +4,15 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+//  Escape function to prevent Cross Site Scripting
+
 const escape = function(str) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
+
+// Calculate how many days ago a tweet was made (Possible TODO - implement days/months/years)
 
 const dateDifference = function(date) {
   let today = new Date();
@@ -24,6 +28,8 @@ const dateDifference = function(date) {
 
   return (differenceDay > 0 ? (differenceDay + (differenceDay > 1 ? 'days ago' : 'day ago')) : 'Today');
   }
+
+// Create the tweet with proper HTML structure
 
 const createTweetElement = function(tweetObj) {
   let tweet = $(`<article class="tweet">
@@ -50,11 +56,15 @@ const createTweetElement = function(tweetObj) {
   return tweet;
 }
 
+// Loop through tweets and append to main site
+
 const renderTweets = function(tweets) {
   for (tweet of tweets) {
     $('#tweets-container').append(createTweetElement(tweet));
   }
 }
+
+// AJAX request to get all tweets, sends them to render
 
 const loadTweets = async () =>  {
   try {
@@ -70,6 +80,8 @@ const loadTweets = async () =>  {
   }
 }
 
+// AJAX post request which also renders the new tweet
+
 const sendTweet = function(tweet) {
   $.ajax({ 
     url: `/tweets`,
@@ -79,6 +91,8 @@ const sendTweet = function(tweet) {
 
   renderNewTweet();
 }
+
+// Checks if new Tweet is valid - if so, sends tweet (which renders)
 
 const validateTweet = function(tweet) {
   const tweetText = tweet.split("=")[1];
@@ -90,6 +104,8 @@ const validateTweet = function(tweet) {
     alert("Tweet must not contain more than 140 characters.");
   }
 }
+
+// Gets tweets, renders most recent (TODO: clean this up by utilizing loadTweet somehow)
 
 const renderNewTweet = async () => {
   try {
@@ -103,6 +119,8 @@ const renderNewTweet = async () => {
     console.error(err);
   }
 }
+
+// Application of function on load
 
 $(document).ready(function() {
   loadTweets();
