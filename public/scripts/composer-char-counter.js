@@ -1,3 +1,10 @@
+const hover = () => {
+  $("#compose-tweet input").hover(function() {
+    $(this).css("cursor", "pointer");
+  }, function() {
+    $(this).css("cursor", "default");
+  })
+}
 
 $(document).ready(function() {
   // --- our code goes here ---
@@ -8,5 +15,7 @@ $(document).ready(function() {
     } else {
       $("section.new-tweet > form > span.counter").css("color", "#545149")
     }
-  })
+  });
+
+  hover()
 });

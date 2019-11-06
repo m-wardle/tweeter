@@ -19,3 +19,9 @@ nav span {
   text-align: left;
   font-family: 'Bungee', sans-serif;
 }
+
+nav span#scroll-toggle {
+  width: 250px;
+  right: 55px;
+  padding: 0;
+}
