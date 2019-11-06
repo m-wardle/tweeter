@@ -96,4 +96,10 @@ $(document).ready(function() {
     event.preventDefault();
     validateTweet($(this).serialize())
   });
+  $('#compose-tweet').keydown(function(event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      validateTweet($(this).serialize())
+    }
+  });
 });
