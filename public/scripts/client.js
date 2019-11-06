@@ -76,6 +76,8 @@ const sendTweet = function(tweet) {
     type: 'POST',
     data: tweet
   })
+
+  renderNewTweet();
 }
 
 const validateTweet = function(tweet) {
@@ -85,8 +87,20 @@ const validateTweet = function(tweet) {
   } else if (tweetText.length <= 0) {
     alert("Tweet cannot be empty!");
   } else if (tweetText.length > 140) {
-    console.log('-------test---------');
     alert("Tweet must not contain more than 140 characters.");
+  }
+}
+
+const renderNewTweet = async () => {
+  try {
+    $('#compose-tweet > textarea').val('');
+    const response = await $.ajax({
+      url: `/tweets`,
+      type: 'GET'
+    })
+    $('#tweets-container').append(createTweetElement(response[response.length - 1]));
+  } catch (err) {
+    console.error(err);
   }
 }
 
@@ -94,12 +108,12 @@ $(document).ready(function() {
   loadTweets();
   $('#compose-tweet').submit(function(event) {
     event.preventDefault();
-    validateTweet($(this).serialize())
+    validateTweet($(this).serialize());
   });
   $('#compose-tweet').keydown(function(event) {
     if (event.keyCode == 13) {
       event.preventDefault();
-      validateTweet($(this).serialize())
+      validateTweet($(this).serialize());
     }
   });
 });
