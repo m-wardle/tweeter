@@ -22,7 +22,7 @@ const dateDifference = function(date) {
   //     differenceDay = differenceDay % 365;
   //   }
 
-  return (differenceDay + (differenceDay > 1 ? 'days ago' : 'day ago') || 'Today');
+  return (differenceDay > 0 ? (differenceDay + (differenceDay > 1 ? 'days ago' : 'day ago')) : 'Today');
   }
 
 const createTweetElement = function(tweetObj) {
@@ -70,15 +70,30 @@ const loadTweets = async () =>  {
   }
 }
 
+const sendTweet = function(tweet) {
+  $.ajax({ 
+    url: `/tweets`,
+    type: 'POST',
+    data: tweet
+  })
+}
+
+const validateTweet = function(tweet) {
+  const tweetText = tweet.split("=")[1];
+  if (tweetText.length > 0 && tweetText.length <= 140) {
+    sendTweet(tweet)
+  } else if (tweetText.length <= 0) {
+    alert("Tweet cannot be empty!");
+  } else if (tweetText.length > 140) {
+    console.log('-------test---------');
+    alert("Tweet must not contain more than 140 characters.");
+  }
+}
 
 $(document).ready(function() {
   loadTweets();
   $('#compose-tweet').submit(function(event) {
     event.preventDefault();
-    $.ajax({ 
-      url: `/tweets`,
-      type: 'POST',
-      data: $(this).serialize()
-     })
+    validateTweet($(this).serialize())
   });
 });
