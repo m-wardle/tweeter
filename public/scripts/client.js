@@ -82,6 +82,5 @@ const renderTweets = function(tweets) {
 }
 
 $(document).ready(function() {
-  console.log("test");
   renderTweets(data);
 });
