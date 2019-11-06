@@ -92,6 +92,19 @@ const sendTweet = function(tweet) {
   renderNewTweet();
 }
 
+// Generates error messages to be used within validateTweet
+
+const errorMessage = function(error) {
+  const message = $(
+  `<div class="isa_error">
+    <i class="fa fa-times-circle"></i>
+    <p>${escape(error)}</p>
+  </div>`
+)
+
+  return message;
+}
+
 // Checks if new Tweet is valid - if so, sends tweet (which renders)
 
 const validateTweet = function(tweet) {
@@ -99,9 +112,12 @@ const validateTweet = function(tweet) {
   if (tweetText.length > 0 && tweetText.length <= 140) {
     sendTweet(tweet)
   } else if (tweetText.length <= 0) {
-    alert("Tweet cannot be empty!");
+    $('#error-message').empty();
+    errorMessage("Tweet cannot be empty!").hide().appendTo($('#error-message')).slideDown("fast");
   } else if (tweetText.length > 140) {
-    alert("Tweet must not contain more than 140 characters.");
+    $('#error-message').empty();
+    errorMessage("Tweet must not contain more than 140 characters.").hide().appendTo($('#error-message')).slideDown("fast");
+    $('#compose-tweet > textarea').val('');
   }
 }
 
@@ -110,6 +126,7 @@ const validateTweet = function(tweet) {
 const renderNewTweet = async () => {
   try {
     $('#compose-tweet > textarea').val('');
+    $('#error-message').empty();
     const response = await $.ajax({
       url: `/tweets`,
       type: 'GET'

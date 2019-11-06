@@ -29,3 +29,15 @@ section.new-tweet .counter {
   position: absolute;
   right: 0;
 }
+
+.isa_error {
+  margin: 10px 0px;
+  padding:12px;
+  color: #D8000C;
+  background-color: #FFD2D2;
+}
+
+#error-message p {
+  margin: 0;
+  display: inline;
+}
