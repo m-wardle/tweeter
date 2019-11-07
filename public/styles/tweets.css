@@ -1,6 +1,8 @@
 #tweets-container {
   /* prevents box-shadows from being cut off on right */
 padding-right: 10px;
+display: flex;
+flex-direction: column-reverse;
 }
 
 article.tweet {
@@ -16,6 +18,14 @@ article.tweet:hover {
 }
 
 article.tweet:hover * p.tweet-handle {
+  visibility: visible;
+}
+
+article.tweet .fas {
+  visibility: hidden;
+}
+
+article.tweet:hover .fas {
   visibility: visible;
 }
 
