@@ -18,19 +18,40 @@ body {
   color: #545149;
   background-color: #f4f1ec;
   font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
   font-weight: 300;
   font-size: 24px;
+  flex-direction: column;
 }
 
 main.container {
   position: relative;
-  top: 120px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
   width: 90%;
-  margin: 0 auto;
+  margin: 2em auto;
   background-color: #f4f1ec;  
 }
 
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- */
+@media only screen and (min-width: 1024px) {
+  body {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 
+  main.container {
+    margin: 2em;
+    margin-top: 7em;
+    height: 80vh;
+    overflow-y: auto;
+    /* hides container scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+  }
+
+  main.container::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+} 
+}

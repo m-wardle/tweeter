@@ -1,10 +1,5 @@
 section.new-tweet {
   width: 100%;
-  margin: 50px 0;
-}
-
-section.new-tweet h2 {
-  text-align: center;
 }
 
 section.new-tweet textarea {
@@ -20,7 +15,7 @@ section.new-tweet textarea {
 section.new-tweet input {
   font-family: 'Bungee', sans-serif;
   color: #ffffff;
-  background-color: #4056A1;
+  background-color: #588B8B;
   border: none;
 }
 
@@ -40,4 +35,10 @@ section.new-tweet .counter {
 #error-message p {
   margin: 0;
   display: inline;
+}
+
+@media only screen and (min-width: 1024px) {
+  section.new-tweet {
+    /* margin-top: 35em; */
+  }
 }

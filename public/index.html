@@ -4,6 +4,9 @@
     <!-- Meta Information -->
     <title>Tweeter - Home Page</title>
 
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
 
@@ -52,14 +55,11 @@
     <!-- Top nav bar (fixed) -->
     <nav>
       <span id="logo">tweeter</span>
-      <span>
-        <span id="scroll-toggle">
-          <b>Write</b> a new tweet
-          <i class="fas fa-angle-double-down animated infinite heartBeat"></i>
-        </span>
+      <span id="scroll-toggle">
+        <p><strong>Write</strong> a new tweet</p>
+        <i class="fas fa-angle-double-down animated infinite heartBeat"></i>
       </span>
-      
-      <!-- TODO: Add chevrons/arrows below 2nd span -->
+
     </nav>
     <header id="site-header">
         <div id="avatar">
@@ -76,7 +76,6 @@
     <!-- New Tweet -->
     <main class="container">
       <section class="new-tweet">
-        <h2>Compose Tweet</h2>
         <section id="error-message">
   
         </section>

@@ -28,17 +28,28 @@ const scrollButton = () => {
 
   $(document).scroll(function() {
     if ($(document).scrollTop() > 20) {
-      btn.css('display', 'block');
-      $('#scroll-toggle').css('display', 'none');
+      btn.css('visibility', 'visible');
+      $('#scroll-toggle').css('visibility', 'hidden');
     } else {
-      btn.css('display', 'none');
-      $('#scroll-toggle').css('display', 'block');
+      btn.css('visibility', 'hidden');
+      $('#scroll-toggle').css('visibility', 'visible');
+    }
+  });
+
+  $("main.container").scroll(function() {
+    if ($("main.container").scrollTop() > 20) {
+      btn.css('visibility', 'visible');
+      $('#scroll-toggle').css('visibility', 'hidden');
+    } else {
+      btn.css('visibility', 'hidden');
+      $('#scroll-toggle').css('visibility', 'visible');
     }
   });
 
   btn.on('click', function(e) {
     e.preventDefault();
     $('html, body').animate({scrollTop:0}, '300');
+    $('html, body, main').animate({scrollTop:0}, '300');
   });
 }
 

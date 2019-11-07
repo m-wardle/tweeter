@@ -6,11 +6,14 @@ article.tweet {
   margin: 20px 0;
 }
 
+/* article.tweet:hover {
+  box-shadow: 10px 10px #bdbdbd;
+} */
+
 article.tweet > header {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  
+  padding: 2%;
 }
 
 article.tweet > header > div.avatar-name {
@@ -41,7 +44,7 @@ div.tweet-text {
 div.tweet-text p {
   margin-top: 0px;
   margin-bottom: 50px;
-  word-break: break-all;
+  /* word-break: break-all; */
 }
 
 article.tweet > footer {
