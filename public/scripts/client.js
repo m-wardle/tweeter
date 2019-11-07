@@ -82,14 +82,21 @@ const loadTweets = async () =>  {
 
 // AJAX post request which also renders the new tweet
 
-const sendTweet = function(tweet) {
-  $.ajax({ 
+const sendTweet = async function(tweet) {
+  $('#compose-tweet > textarea').val('');
+  $('#error-message').empty();
+  try {
+    await $.ajax({ 
     url: `/tweets`,
     type: 'POST',
     data: tweet
   })
 
   renderNewTweet();
+
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 // Generates error messages to be used within validateTweet
@@ -125,8 +132,6 @@ const validateTweet = function(tweet) {
 
 const renderNewTweet = async () => {
   try {
-    $('#compose-tweet > textarea').val('');
-    $('#error-message').empty();
     const response = await $.ajax({
       url: `/tweets`,
       type: 'GET'
