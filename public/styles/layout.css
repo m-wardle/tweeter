@@ -43,7 +43,7 @@ main.container {
   main.container {
     margin: 2em;
     margin-top: 7em;
-    height: 80vh;
+    height: 75vh;
     overflow-y: auto;
     /* hides container scrollbar */
     scrollbar-width: none; /* Firefox */
