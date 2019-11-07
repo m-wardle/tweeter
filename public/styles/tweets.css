@@ -1,3 +1,8 @@
+#tweets-container {
+  /* prevents box-shadows from being cut off on right */
+padding-right: 10px;
+}
+
 article.tweet {
   border: 5px solid #545149;
   display: flex;
@@ -6,9 +11,13 @@ article.tweet {
   margin: 20px 0;
 }
 
-/* article.tweet:hover {
-  box-shadow: 10px 10px #bdbdbd;
-} */
+article.tweet:hover {
+  box-shadow: 10px 10px 10px #bdbdbd;
+}
+
+article.tweet:hover * p.tweet-handle {
+  visibility: visible;
+}
 
 article.tweet > header {
   display: flex;
