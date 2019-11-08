@@ -1,6 +1,5 @@
 #tweets-container {
-  /* prevents box-shadows from being cut off on right */
-padding-right: 10px;
+padding-right: 10px;   /* prevents box-shadows from being cut off on right */
 display: flex;
 flex-direction: column-reverse;
 }

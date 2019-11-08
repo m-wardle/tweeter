@@ -1,3 +1,5 @@
+// Commented code intentionally left in pending possible fix for animation lag.
+
 let toggle = 0
 
 const scrollToggle = () => {
