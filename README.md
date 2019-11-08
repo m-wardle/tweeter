@@ -22,5 +22,8 @@ Mobile view with collapsed header to maximize screen space while scrolling
 
 ## Dependencies
 
-- Express
+- Express 4.13.4 or above
 - Node 5.10.x or above
+- Body-Parser 1.15.2 or above
+- Chance 1.0.2 or above
+- MD5 2.1.0 or above
