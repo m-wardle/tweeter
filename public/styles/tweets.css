@@ -1,5 +1,4 @@
 #tweets-container {
-  /* prevents box-shadows from being cut off on right */
 padding-right: 10px;
 display: flex;
 flex-direction: column-reverse;
@@ -63,7 +62,6 @@ div.tweet-text {
 div.tweet-text p {
   margin-top: 0px;
   margin-bottom: 50px;
-  /* word-break: break-all; */
 }
 
 article.tweet > footer {

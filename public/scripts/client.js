@@ -21,36 +21,32 @@ const dateDifference = function(date) {
   let difference = today - date;
   let differenceDay = Math.floor(difference / (1000 * 3600 * 24));
 
-  // if (differenceDay > 365) {
-  //     let years = Math.floor(differenceDay / 365);
-  //     differenceDay = differenceDay % 365;
-  //   }
-
   return (differenceDay > 0 ? (differenceDay + (differenceDay > 1 ? 'days ago' : 'day ago')) : 'Today');
   }
 
 // Create the tweet with proper HTML structure
 
 const createTweetElement = function(tweetObj) {
-  let tweet = $(`<article class="tweet">
-  <header>
-    <div class="avatar-name">
-      <img class="tweet-avatar" src="${escape(tweetObj.user.avatars)}">
-      <p class="tweet-name">${escape(tweetObj.user.name)}</p>
+  let tweet = $(
+  `<article class="tweet">
+    <header>
+      <div class="avatar-name">
+        <img class="tweet-avatar" src="${escape(tweetObj.user.avatars)}">
+        <p class="tweet-name">${escape(tweetObj.user.name)}</p>
+      </div>
+      <p class="tweet-handle">${escape(tweetObj.user.handle)}</p>
+    </header>
+    <div class="tweet-text">
+      <p>${escape(tweetObj.content.text)}</p>
     </div>
-    <p class="tweet-handle">${escape(tweetObj.user.handle)}</p>
-  </header>
-  <div class="tweet-text">
-    <p>${escape(tweetObj.content.text)}</p>
-  </div>
-  <footer>
-    <p class="tweet-timestamp">${dateDifference(tweetObj.created_at)}</p>
-    <div class="tweet-icons">
-      <i class="fas fa-flag"></i>
-      <i class="fas fa-retweet"></i>
-      <i class="fas fa-heart"></i>
-    </div>
-  </footer>
+    <footer>
+      <p class="tweet-timestamp">${dateDifference(tweetObj.created_at)}</p>
+      <div class="tweet-icons">
+        <i class="fas fa-flag"></i>
+        <i class="fas fa-retweet"></i>
+        <i class="fas fa-heart"></i>
+      </div>
+    </footer>
   </article>`)
 
   return tweet;

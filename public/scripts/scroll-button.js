@@ -3,28 +3,10 @@ let toggle = 0
 const scrollToggle = () => {
   if (toggle === 0) {
     $(".new-tweet").show(500);
-    // if ($(document).width() < 1024) {
-    //   $('html, body').animate({
-    //     scrollTop: $(".new-tweet").offset().top - 150
-    //   }, 1000);
-    // } else {
-    //   $('html, body, .container').animate({
-    //     scrollTop: $("#tweets-container").offset().top - 150
-    //   }, 1000);
-    // }
     $(".new-tweet textarea").focus();
     toggle = 1; 
   } else { 
     $(".new-tweet").hide(500);
-    // if ($(document).width() < 1024) {
-    //   $('html, body').animate({ 
-    //     scrollTop: $("#tweets-container").offset().top - 105
-    //   }, 1000);
-    // } else {
-    //   $('html, body, .container').animate({
-    //     scrollTop: $(".new-tweet").offset().top - 70
-    //   }, 1000);
-    // }
     toggle = 0;
   }
 }
@@ -69,13 +51,6 @@ const scrollButton = () => {
 
 
 $(document).ready(function() {
-  // if ($(document).width() < 1024) {
-  //   $("#tweets-container").scrollTop
-  // } else {
-  //   $('html, body, .container').animate({
-  //     scrollTop: $(".new-tweet").offset().top - 70
-  //   }, 1000);
-  // }
   $("#scroll-toggle").on("click", () => {
     scrollToggle();
   })
