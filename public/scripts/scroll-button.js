@@ -1,4 +1,4 @@
-let toggle = 0
+let toggle = 0;
 
 // Toggles the tweet composer visibility.
 
@@ -6,12 +6,12 @@ const composeToggle = () => {
   if (toggle === 0) {
     $(".new-tweet").show(500);
     $(".new-tweet textarea").focus();
-    toggle = 1; 
-  } else { 
+    toggle = 1;
+  } else {
     $(".new-tweet").hide(500);
     toggle = 0;
   }
-}
+};
 
 // Toggling pointer cursor with jQuery - could be done with CSS, but wanted practice.
 
@@ -20,8 +20,8 @@ const scrollHover = () => {
     $(this).css("cursor", "pointer");
   }, function() {
     $(this).css("cursor", "default");
-  })
-}
+  });
+};
 
 // Implements the scroll to top button appearing/compose tweet button disappearing.
 // Needed some extra logic to work with the overflow container on desktop.
@@ -54,13 +54,13 @@ const scrollButton = () => {
     $('html, body').animate({scrollTop:0}, '300');
     $('html, body, main').animate({scrollTop:0}, '300');
   });
-}
+};
 
 
 $(document).ready(function() {
   $("#scroll-toggle").on("click", () => {
     composeToggle();
-  })
+  });
   scrollHover();
   scrollButton();
 });

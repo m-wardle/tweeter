@@ -7,5 +7,5 @@ $(document).ready(function() {
   }, function() {
     $(this).css("box-shadow", "none");
     $(this).find("p.tweet-handle").css("visibility", "hidden");
-  })
+  });
 });

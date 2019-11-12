@@ -10,25 +10,24 @@ const escape = function(str) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
-}
+};
 
 // Calculate how many days ago a tweet was made (Possible TODO - implement days/months/years)
 
 const dateDifference = function(date) {
   let today = new Date();
-  let tweet = date;
 
   let difference = today - date;
   let differenceDay = Math.floor(difference / (1000 * 3600 * 24));
 
   return (differenceDay > 0 ? (differenceDay + (differenceDay > 1 ? 'days ago' : 'day ago')) : 'Today');
-  }
+};
 
 // Create the tweet with proper HTML structure
 
 const createTweetElement = function(tweetObj) {
   let tweet = $(
-  `<article class="tweet">
+    `<article class="tweet">
     <header>
       <div class="avatar-name">
         <img class="tweet-avatar" src="${escape(tweetObj.user.avatars)}">
@@ -47,34 +46,34 @@ const createTweetElement = function(tweetObj) {
         <i class="fas fa-heart"></i>
       </div>
     </footer>
-  </article>`)
+  </article>`);
 
   return tweet;
-}
+};
 
 // Loop through tweets and append to main site
 
 const renderTweets = function(tweets) {
-  for (tweet of tweets) {
+  for (let tweet of tweets) {
     $('#tweets-container').append(createTweetElement(tweet));
   }
-}
+};
 
 // AJAX request to get all tweets, sends them to render
 
-const loadTweets = async () =>  {
+const loadTweets = async() =>  {
   try {
     const response = await $.ajax({
       url: `/tweets`,
       type: 'GET'
-    })
+    });
 
-    renderTweets(response)
+    renderTweets(response);
 
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
+};
 
 // AJAX post request which also renders the new tweet
 
@@ -82,38 +81,38 @@ const sendTweet = async function(tweet) {
   $('#compose-tweet > textarea').val('');
   $('#error-message').empty();
   try {
-    await $.ajax({ 
-    url: `/tweets`,
-    type: 'POST',
-    data: tweet
-  })
+    await $.ajax({
+      url: `/tweets`,
+      type: 'POST',
+      data: tweet
+    });
 
-  renderNewTweet();
+    renderNewTweet();
 
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 // Generates error messages to be used within validateTweet
 
 const errorMessage = function(error) {
   const message = $(
-  `<div class="isa_error">
+    `<div class="isa_error">
     <i class="fa fa-times-circle"></i>
     <p>${escape(error)}</p>
   </div>`
-)
+  );
 
   return message;
-}
+};
 
 // Checks if new Tweet is valid - if so, sends tweet (which renders)
 
 const validateTweet = function(tweet) {
   const tweetText = tweet.split("=")[1];
   if (tweetText.length > 0 && tweetText.length <= 140) {
-    sendTweet(tweet)
+    sendTweet(tweet);
   } else if (tweetText.length <= 0) {
     $('#error-message').empty();
     errorMessage("Tweet cannot be empty!").hide().appendTo($('#error-message')).slideDown("fast");
@@ -122,21 +121,21 @@ const validateTweet = function(tweet) {
     errorMessage("Tweet must not contain more than 140 characters.").hide().appendTo($('#error-message')).slideDown("fast");
     $('#compose-tweet > textarea').val('');
   }
-}
+};
 
 // Gets tweets, renders most recent (TODO: clean this up by utilizing loadTweet somehow)
 
-const renderNewTweet = async () => {
+const renderNewTweet = async() => {
   try {
     const response = await $.ajax({
       url: `/tweets`,
       type: 'GET'
-    })
+    });
     $('#tweets-container').append(createTweetElement(response[response.length - 1]));
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 // Application of function on load
 
@@ -146,8 +145,11 @@ $(document).ready(function() {
     event.preventDefault();
     validateTweet($(this).serialize());
   });
+
+  // Submits tweet when enter is pressed.
+  
   $('#compose-tweet').keydown(function(event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       event.preventDefault();
       validateTweet($(this).serialize());
     }
